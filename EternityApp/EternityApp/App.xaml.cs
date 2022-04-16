@@ -1,5 +1,4 @@
-﻿using EternityApp.Services;
-using EternityApp.Views;
+﻿using EternityApp.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,8 +11,6 @@ namespace EternityApp
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 
