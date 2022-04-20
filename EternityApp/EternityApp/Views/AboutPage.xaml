@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EternityApp.Views.AboutPage"
+             Title="О приложении">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="icon_cities.png" WidthRequest="200" HorizontalOptions="CenterAndExpand" />
+            <Label Text="Прикасаясь к вечности" HorizontalOptions="CenterAndExpand" FontSize="24" FontAttributes="Bold" />
+            <Label x:Name="InfoLabel" FontSize="16" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

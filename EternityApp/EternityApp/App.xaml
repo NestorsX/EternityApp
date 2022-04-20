@@ -11,6 +11,8 @@
             <Color x:Key="ButtonBackground">#b385d9</Color>
             <Color x:Key="TitleBackground">#4e4387</Color>
             <Color x:Key="TitleColor">White</Color>
+            <Color x:Key="TextColor">#000000</Color>
+            <Color x:Key="SelectedItemColor">#66b385d9</Color>
 
         </ResourceDictionary>
 
