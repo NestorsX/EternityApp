@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using EternityApp.Models;
+using EternityApp.Services;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,19 +17,29 @@ namespace EternityApp.Views
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
+            ErrorLabel.IsVisible = false;
             LoadingWheel.IsRunning = true;
-            await Shell.Current.GoToAsync("//MainPage");
+            var userService = new UserService();
+            if (Username.Text != null && Password.Text != null)
+            {
+                User currentUser = await userService.Get(Username.Text, Password.Text);
+                if (currentUser != null)
+                {
+                    Application.Current.Properties["id"] = currentUser.UserId;
+                    await Shell.Current.GoToAsync("//MainPage");
+                }
+                else
+                {
+                    ErrorLabel.IsVisible = true;
+                }
+            }
+
             LoadingWheel.IsRunning = false;
         }
 
         private async void RegisterButton_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
-        }
-
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-
         }
     }
 }
