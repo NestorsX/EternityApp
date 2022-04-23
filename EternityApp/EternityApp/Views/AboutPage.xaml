@@ -2,19 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EternityApp.Views.AboutPage"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="О приложении">
     <ContentPage.Content>
         <StackLayout>
             <Image Source="icon_cities.png" WidthRequest="200" HorizontalOptions="CenterAndExpand" />
             <Label Text="Прикасаясь к вечности" HorizontalOptions="CenterAndExpand" FontSize="24" FontAttributes="Bold" />
             <Label x:Name="InfoLabel" FontSize="16" HorizontalTextAlignment="Center"/>
-
-            <ffimageloading:CachedImage HorizontalOptions="CenterAndExpand"
-			    Source = "http://eternity.somee.com/images/test/test.jpg"
-                WidthRequest="200"
-                LoadingPlaceholder="Loading"
-                ErrorPlaceholder="Error"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

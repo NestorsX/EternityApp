@@ -1,13 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="EternityApp.Views.CitiesPage"
              Title="Города">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <AbsoluteLayout>
+            <StackLayout x:Name="BusyLayout" IsVisible="false" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ActivityIndicator x:Name="LoadingWheel" IsRunning="False" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            <StackLayout x:Name="MainLayout" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ListView x:Name="citiesList" HasUnevenRows="True" SelectionMode="None" IsPullToRefreshEnabled="True" Refreshing="citiesList_Refreshing" ItemTapped="citiesList_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Margin="10,10,10,10" BackgroundColor="Transparent">
+                                    <Frame CornerRadius="25" Padding="0" BackgroundColor="{StaticResource Primary}">
+                                        <StackLayout Padding="0">
+                                            <Label Text="{Binding Title}" TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
+                                            <Frame CornerRadius="25" HeightRequest="190" Padding="0">
+                                                <StackLayout Padding="0" BackgroundColor="Transparent">
+                                                    <ffimageloading:CachedImage x:Name="Image" Source="{Binding TitleImagePath}" Aspect="AspectFill"/>
+                                                    <ActivityIndicator BindingContext="{x:Reference Image}" IsRunning="{Binding IsLoading}"  IsVisible="{Binding IsLoading}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

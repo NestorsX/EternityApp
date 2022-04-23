@@ -3,16 +3,12 @@
 
   <style name="MainTheme" parent="MainTheme.Base">
     <!-- Цвет панели заголовка -->
-    <item name="android:colorPrimary">#4e4387</item>
+    <item name="colorPrimary">#4e4387</item>
     <!-- Цвет строки состояния -->
-    <item name="android:colorPrimaryDark">#4e4387</item>
+    <item name="colorPrimaryDark">#4e4387</item>
     <!-- Акцентный цвет -->
-    <item name="android:colorAccent">#b385d9</item>
-    <!-- Цвет текста в заголовке -->
-    <item name="android:textColorPrimary">#ffffff</item>
-    <!-- Цвет текста -->
-    <item name="android:textColor">#000000</item>
+    <item name="colorAccent">#b385d9</item>
     <!-- Цвет неактивированного контрола (например линия в Entry) -->
-    <item name="android:colorControlNormal">#808080</item>
+    <item name="colorControlNormal">#808080</item>
   </style>
 </resources>

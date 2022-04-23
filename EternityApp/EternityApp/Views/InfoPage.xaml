@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="EternityApp.Views.InfoPage"
+             Title="Города">
+    <ContentPage.Content>
+        <ScrollView>
+            <AbsoluteLayout>
+                <StackLayout x:Name="BusyLayout" IsVisible="false" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                    <ActivityIndicator x:Name="LoadingWheel" IsRunning="False" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+                <StackLayout x:Name="MainLayout" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Margin="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label x:Name="TitleLabel" Grid.Row="0" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource TextColor}" />
+                        <CarouselView x:Name="ImageCarousel" Grid.Row="1" HeightRequest="300">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Frame CornerRadius="25" Padding="0" HeightRequest="300">
+                                            <StackLayout Padding="0" BackgroundColor="Transparent">
+                                                <ffimageloading:CachedImage Source="{Binding Path}" HeightRequest="300" Aspect="AspectFill"/>
+                                                <ActivityIndicator BindingContext="{x:Reference Image}" IsRunning="{Binding IsLoading}"  IsVisible="{Binding IsLoading}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        <Label x:Name="DescriptionLabel" LineBreakMode="WordWrap" Grid.Row="2" BackgroundColor="Aqua" FontSize="16" TextColor="{StaticResource TextColor}" />
+                    </Grid>
+                </StackLayout>
+            </AbsoluteLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
