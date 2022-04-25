@@ -48,6 +48,7 @@ namespace EternityApp.Views
         {
             base.OnAppearing();
             BusyLayout.IsVisible = true;
+            MainLayout.IsVisible = false;
             LoadingWheel.IsRunning = true;
             _city = await _cityService.Get(_id);
             Images = await _imageService.Get(_category, _id);
@@ -55,6 +56,7 @@ namespace EternityApp.Views
             ImageCarousel.ItemsSource = Images;
             DescriptionLabel.Text = _city.Description;
             BusyLayout.IsVisible = false;
+            MainLayout.IsVisible = true;
             LoadingWheel.IsRunning = false;
         }
     }

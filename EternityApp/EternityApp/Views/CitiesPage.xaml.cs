@@ -25,15 +25,21 @@ namespace EternityApp.Views
         {
             base.OnAppearing();
             BusyLayout.IsVisible = true;
+            MainLayout.IsVisible = false;
             LoadingWheel.IsRunning = true;
-            _citiesList = await _cityService.Get();
-            foreach (var city in _citiesList)
+            if (_citiesList == null)
             {
-                city.TitleImagePath = $"http://eternity.somee.com/images/cities/{city.CityId}/{await _imageService.GetTitleImage("cities", (int)city.CityId)}";
+                _citiesList = await _cityService.Get();
+                foreach (var city in _citiesList)
+                {
+                    city.TitleImagePath = $"http://eternity.somee.com/images/cities/{city.CityId}/{await _imageService.GetTitleImage("cities", (int)city.CityId)}";
+                }
+
+                citiesList.ItemsSource = _citiesList;
             }
 
-            citiesList.ItemsSource = _citiesList;
             BusyLayout.IsVisible = false;
+            MainLayout.IsVisible = true;
             LoadingWheel.IsRunning = false;
         }
 

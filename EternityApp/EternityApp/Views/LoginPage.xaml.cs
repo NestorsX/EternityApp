@@ -18,7 +18,7 @@ namespace EternityApp.Views
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
             BusyLayout.IsVisible = true;
-            MainLayout.IsEnabled = false;
+            MainLayout.IsVisible = false;
             ErrorLabel.IsVisible = false;
             LoadingWheel.IsRunning = true;
             var userService = new UserService();
@@ -37,7 +37,7 @@ namespace EternityApp.Views
             }
 
             BusyLayout.IsVisible = false;
-            MainLayout.IsEnabled = true;
+            MainLayout.IsVisible = true;
             LoadingWheel.IsRunning = false;
         }
 

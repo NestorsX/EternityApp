@@ -20,7 +20,7 @@
                                         <StackLayout>
                                             <Frame CornerRadius="25" Padding="0" HeightRequest="300">
                                                 <StackLayout Padding="0" BackgroundColor="Transparent">
-                                                    <ffimageloading:CachedImage x:Name="img" Source="{Binding Path}" LoadingPlaceholder="icon_help.png" DownsampleToViewSize="True" HeightRequest="300" Aspect="AspectFill"/>
+                                                    <ffimageloading:CachedImage x:Name="img" Source="{Binding Path}" DownsampleToViewSize="True" HeightRequest="300" Aspect="AspectFill"/>
                                                     <ActivityIndicator BindingContext="{x:Reference img}" IsRunning="{Binding IsLoading}"  IsVisible="{Binding IsLoading}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
                                                 </StackLayout>
                                             </Frame>
