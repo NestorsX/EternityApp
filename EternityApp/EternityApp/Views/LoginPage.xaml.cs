@@ -24,13 +24,13 @@ namespace EternityApp.Views
             var userService = new UserService();
             if (Username.Text != null && Password.Text != null)
             {
-                User currentUser = await userService.Get(Username.Text, Password.Text);
-                if (currentUser != null)
+                try
                 {
+                    User currentUser = await userService.Get(Username.Text, Password.Text);
                     Application.Current.Properties["id"] = currentUser.UserId;
                     await Shell.Current.GoToAsync("//MainPage");
                 }
-                else
+                catch
                 {
                     ErrorLabel.IsVisible = true;
                 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EternityApp.Models;
+using EternityApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +19,37 @@ namespace EternityApp.Views
             InitializeComponent();
         }
 
-        private void RegisterButton_Clicked(object sender, EventArgs e)
+        private async void RegisterButton_Clicked(object sender, EventArgs e)
         {
+            BusyLayout.IsVisible = true;
+            MainLayout.IsVisible = false;
+            ErrorLabel.IsVisible = false;
+            LoadingWheel.IsRunning = true;
+            var userService = new UserService();
+            if (Username.Text != null && Password.Text != null)
+            {
+                try
+                {
+                    User currentUser = await userService.Add(new User()
+                    {
+                        UserId = null,
+                        UserName = Username.Text,
+                        Email = Email.Text,
+                        Password = Password.Text,
+                        RoleId = 1
+                    });
+                    Application.Current.Properties["id"] = currentUser.UserId;
+                    await Shell.Current.GoToAsync("//MainPage");
+                }
+                catch
+                {
+                    ErrorLabel.IsVisible = true;
+                }
+            }
 
+            BusyLayout.IsVisible = false;
+            MainLayout.IsVisible = true;
+            LoadingWheel.IsRunning = false;
         }
     }
 }
