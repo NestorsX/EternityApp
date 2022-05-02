@@ -10,6 +10,7 @@
                 <ActivityIndicator x:Name="LoadingWheel" IsRunning="False" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
             </StackLayout>
             <StackLayout x:Name="MainLayout" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Label x:Name="NoData" Text="К сожалению, здесь ничего нет :(" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsVisible="False" />
                 <ListView x:Name="citiesList" HasUnevenRows="True" SelectionMode="None" IsPullToRefreshEnabled="True" Refreshing="citiesList_Refreshing" ItemTapped="citiesList_ItemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>

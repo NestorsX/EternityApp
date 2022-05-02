@@ -1,31 +1,19 @@
 ﻿using EternityApp.Models;
 using EternityApp.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace EternityApp.Views
 {
-    [QueryProperty(nameof(Category), "category")]
     [QueryProperty(nameof(Id), "id")]
     [XamlCompilation(XamlCompilationOptions.Skip)]
-    public partial class InfoPage : ContentPage
+    public partial class CurrentAttractionPage : ContentPage
     {
-        private readonly CityService _cityService;
+        private readonly AttractionService _attractionService;
         private readonly ImageService _imageService;
-        private City _city;
-        private string _category;
+        private Attraction _attraction;
         private int _id;
-
-        public string Category
-        {
-            set
-            {
-                _category = Uri.UnescapeDataString(value);
-            }
-        }
 
         public new int Id
         {
@@ -37,10 +25,10 @@ namespace EternityApp.Views
 
         public IEnumerable<Models.Image> Images { get; set; }
 
-        public InfoPage()
+        public CurrentAttractionPage()
         {
             InitializeComponent();
-            _cityService = new CityService();
+            _attractionService = new AttractionService();
             _imageService = new ImageService();
         }
 
@@ -50,11 +38,11 @@ namespace EternityApp.Views
             BusyLayout.IsVisible = true;
             MainLayout.IsVisible = false;
             LoadingWheel.IsRunning = true;
-            _city = await _cityService.Get(_id);
-            Images = await _imageService.Get(_category, _id);
-            TitleLabel.Text = _city.Title;
+            _attraction = await _attractionService.Get(_id);
+            Images = await _imageService.Get("attractions", _id);
+            TitleLabel.Text = _attraction.Title;
             ImageCarousel.ItemsSource = Images;
-            DescriptionLabel.Text = _city.Description;
+            DescriptionLabel.Text = _attraction.Description;
             BusyLayout.IsVisible = false;
             MainLayout.IsVisible = true;
             LoadingWheel.IsRunning = false;
