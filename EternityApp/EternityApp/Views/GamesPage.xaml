@@ -4,10 +4,48 @@
              x:Class="EternityApp.Views.GamesPage"
              Title="Игры">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Frame CornerRadius="25" Padding="0" Margin="10" BackgroundColor="{StaticResource Primary}">
+                    <StackLayout Padding="0">
+                        <Label Text="Игра1" TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
+                        <Frame CornerRadius="25" HeightRequest="200" Padding="5">
+                            <StackLayout Padding="0" BackgroundColor="Transparent">
+                                <Image Source="icon_help.png" HeightRequest="200"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Frame CornerRadius="25" Padding="0" Margin="10" BackgroundColor="{StaticResource Primary}">
+                    <StackLayout Padding="0">
+                        <Label Text="Игра2" TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
+                        <Frame CornerRadius="25" HeightRequest="200" Padding="5">
+                            <StackLayout Padding="0" BackgroundColor="Transparent">
+                                <Image Source="icon_help.png" HeightRequest="200"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Frame CornerRadius="25" Padding="0" Margin="10" BackgroundColor="{StaticResource Primary}">
+                    <StackLayout Padding="0">
+                        <Label Text="Игра3" TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
+                        <Frame CornerRadius="25" HeightRequest="200" Padding="5">
+                            <StackLayout Padding="0" BackgroundColor="Transparent">
+                                <Image Source="icon_help.png" HeightRequest="200"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
