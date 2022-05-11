@@ -2,6 +2,7 @@
 using EternityApp.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -9,16 +10,19 @@ using Xamarin.Forms.Xaml;
 namespace EternityApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AttractionsPage : ContentPage
+    public partial class AttractionBookmarksPage : ContentPage
     {
         private readonly AttractionService _attractionService;
         private readonly ImageService _imageService;
+        private readonly BookmarkService _bookmarkService;
         private IEnumerable<Attraction> _attractionsList;
-        public AttractionsPage()
+
+        public AttractionBookmarksPage()
         {
             InitializeComponent();
             _attractionService = new AttractionService();
             _imageService = new ImageService();
+            _bookmarkService = new BookmarkService();
             Routing.RegisterRoute("/CurrentAttractionPage", typeof(CurrentAttractionPage));
         }
 
@@ -41,7 +45,15 @@ namespace EternityApp.Views
             _attractionsList = null;
             try
             {
+                IEnumerable<AttractionBookmark> bookmarks = await _bookmarkService.GetAttractionBookmarkList((int)Application.Current.Properties["id"]);
                 _attractionsList = await _attractionService.Get();
+                var bookmarkedCities = new List<Attraction>();
+                foreach (var item in bookmarks)
+                {
+                    bookmarkedCities.Add(_attractionsList.First(x => x.AttractionId == item.AttractionId));
+                }
+
+                _attractionsList = bookmarkedCities;
                 foreach (var item in _attractionsList)
                 {
                     item.TitleImagePath = $"http://eternity.somee.com/images/attractions/{item.AttractionId}/{await _imageService.GetTitleImage("attractions", (int)item.AttractionId)}";

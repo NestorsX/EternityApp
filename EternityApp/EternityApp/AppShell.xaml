@@ -95,6 +95,9 @@
     <FlyoutItem Title="Профиль" Icon="icon_profile.png">
         <ShellContent Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Закладки" Icon="icon_saved.png">
+        <ShellContent Route="SavedPage" ContentTemplate="{DataTemplate local:SavedPage}" />
+    </FlyoutItem>
     <FlyoutItem Title="О приложении" Icon="icon_help.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>

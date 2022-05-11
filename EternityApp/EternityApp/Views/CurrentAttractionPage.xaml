@@ -4,6 +4,9 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="EternityApp.Views.CurrentAttractionPage"
              Title="Достопримечательности">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="icon_bookmark.png" Text="Сохранить" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
             <AbsoluteLayout>

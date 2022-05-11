@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EternityApp.Views.SavedPage"
+             Title="Закладки">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame CornerRadius="25" Padding="0" Margin="10" BackgroundColor="{StaticResource Primary}">
+                <StackLayout Padding="0">
+                    <Label Text="Города" TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
+                    <Frame CornerRadius="25" HeightRequest="200" Padding="5">
+                        <StackLayout Padding="0" BackgroundColor="Transparent">
+                            <Image Source="icon_cities.png" HeightRequest="200"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="CityBookmarks_Tapped" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Frame CornerRadius="25" Padding="0" Margin="10" BackgroundColor="{StaticResource Primary}">
+                <StackLayout Padding="0">
+                    <Label Text="Достопримечательности" TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
+                    <Frame CornerRadius="25" HeightRequest="200" Padding="5">
+                        <StackLayout Padding="0" BackgroundColor="Transparent">
+                            <Image Source="icon_attractions.png" HeightRequest="200"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="AttractionBookmarks_Tapped" />
+                </Frame.GestureRecognizers>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
