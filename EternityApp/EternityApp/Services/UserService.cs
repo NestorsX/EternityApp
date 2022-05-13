@@ -37,6 +37,12 @@ namespace EternityApp.Services
             return JsonSerializer.Deserialize<User>(result, _options);
         }
 
+        // Получаем пользователя по логину и паролю
+        public async Task RestorePassword(string email)
+        {
+            await _client.GetStringAsync(_url + $"restorepassword/{email}");
+        }
+
         // Добавление пользователя
         public async Task<User> Add(User user)
         {

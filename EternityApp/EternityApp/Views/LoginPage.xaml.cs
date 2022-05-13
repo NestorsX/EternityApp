@@ -13,6 +13,7 @@ namespace EternityApp.Views
         {
             InitializeComponent();
             Routing.RegisterRoute("//RegisterPage", typeof(RegisterPage));
+            Routing.RegisterRoute("//RestorePasswordPage", typeof(RestorePasswordPage));
         }
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
@@ -44,6 +45,11 @@ namespace EternityApp.Views
         private async void RegisterButton_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
+        }
+
+        private async void RestorePassword_Tapped(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync($"//{nameof(RestorePasswordPage)}");
         }
     }
 }
