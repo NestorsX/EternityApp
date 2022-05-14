@@ -16,7 +16,7 @@
                         </Frame>
                     </StackLayout>
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        <TapGestureRecognizer Tapped="Game1_Tapped" />
                     </Frame.GestureRecognizers>
                 </Frame>
                 <Frame CornerRadius="25" Padding="0" Margin="10" BackgroundColor="{StaticResource Primary}">
@@ -29,7 +29,7 @@
                         </Frame>
                     </StackLayout>
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        <TapGestureRecognizer Tapped="Game2_Tapped" />
                     </Frame.GestureRecognizers>
                 </Frame>
                 <Frame CornerRadius="25" Padding="0" Margin="10" BackgroundColor="{StaticResource Primary}">
@@ -42,7 +42,7 @@
                         </Frame>
                     </StackLayout>
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        <TapGestureRecognizer Tapped="Game3_Tapped" />
                     </Frame.GestureRecognizers>
                 </Frame>
             </StackLayout>

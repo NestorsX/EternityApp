@@ -36,10 +36,17 @@ namespace EternityApp.Services
             return images;
         }
 
+        // Получаем главную картинку
         public async Task<string> GetTitleImage(string category, int id)
         {
             string result = await _client.GetStringAsync($"{_url}/{category}/{id}");
             return JsonSerializer.Deserialize<IEnumerable<Image>>(result, _options).First().Path;
+        }
+
+        // Отправляем картинку пользователя на сервер
+        public async Task PostUserImage(int userId, MultipartFormDataContent content)
+        {
+            await _client.PostAsync($"{_url}/{userId}", content);
         }
     }
 }

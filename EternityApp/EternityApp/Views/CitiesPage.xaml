@@ -22,7 +22,7 @@
                                             <Frame CornerRadius="25" HeightRequest="190" Padding="0">
                                                 <StackLayout Padding="0" BackgroundColor="Transparent">
                                                     <ffimageloading:CachedImage x:Name="Image" Source="{Binding TitleImagePath}" Aspect="AspectFill"/>
-                                                    <ActivityIndicator BindingContext="{x:Reference Image}" IsRunning="{Binding IsLoading}"  IsVisible="{Binding IsLoading}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                                    <ActivityIndicator BindingContext="{x:Reference Image}" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
                                                 </StackLayout>
                                             </Frame>
                                         </StackLayout>

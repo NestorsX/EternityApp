@@ -1,11 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="EternityApp.Views.ProfilePage"
              Title="Профиль">
     <ContentPage.Content>
-        <StackLayout>
-            
-        </StackLayout>
+        <AbsoluteLayout>
+            <StackLayout x:Name="BusyLayout" IsVisible="false" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ActivityIndicator x:Name="LoadingWheel" IsRunning="False" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            <StackLayout x:Name="MainLayout" VerticalOptions="Fill" HorizontalOptions="Fill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout VerticalOptions="Start" HeightRequest="150" BackgroundColor="{StaticResource TitleBackground}" Padding="0">
+                            <Frame Padding="0" WidthRequest="120" HeightRequest="120" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" CornerRadius="120" >
+                                <StackLayout Padding="0" BackgroundColor="Transparent">
+                                    <ffimageloading:CachedImage x:Name="Image" Source="icon_no_avatar.png" Aspect="AspectFill"/>
+                                    <ActivityIndicator BindingContext="{x:Reference Image}" IsRunning="{Binding IsLoading}"  IsVisible="{Binding IsLoading}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="UserImage_Clicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout Padding="10" Margin="0,10,0,0">
+                            <Frame>
+                                <StackLayout>
+                                    <Label Text="Смена email" FontSize="Medium" FontAttributes="Bold" />
+                                    <Entry x:Name="Email" Placeholder="example@mail.com" />
+                                </StackLayout>
+                            </Frame>
+                            <Frame>
+                                <StackLayout>
+                                    <Label Text="Смена логина" FontSize="Medium" FontAttributes="Bold" />
+                                    <Entry x:Name="Username" Placeholder="Имя пользователя" />
+                                </StackLayout>
+                            </Frame>
+                            <Frame>
+                                <StackLayout>
+                                    <Label Text="Смена пароля" FontSize="Medium" FontAttributes="Bold" />
+                                    <Entry x:Name="OldPassword" Placeholder="Старый пароль" IsPassword="True"/>
+                                    <Entry x:Name="NewPassword" Placeholder="Новый пароль" IsPassword="True"/>
+                                    <Entry x:Name="NewPassword2" Placeholder="Повторите новый пароль" IsPassword="True"/>
+                                </StackLayout>
+                            </Frame>
+                            <Label x:Name="ErrorLabel" Text="Неверный логин или пароль!" IsVisible="False" Margin="0,20,0,0" />
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

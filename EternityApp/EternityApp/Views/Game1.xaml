@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EternityApp.Views.Game1"
+             Title="Карточки">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout x:Name="BusyLayout" IsVisible="false" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ActivityIndicator x:Name="LoadingWheel" IsRunning="false" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            <ScrollView>
+                <StackLayout x:Name="MainLayout" VerticalOptions="Fill" HorizontalOptions="Fill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                    <Grid x:Name="GameGrid" Padding="5" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout x:Name="GoBackLayout" IsVisible="false" VerticalOptions="Fill" HorizontalOptions="Fill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout VerticalOptions="CenterAndExpand" Padding="20">
+                    <Label HorizontalOptions="Center" Text="Ура! Вы отгадали все карточки!" />
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
