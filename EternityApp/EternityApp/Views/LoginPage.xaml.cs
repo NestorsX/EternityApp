@@ -1,6 +1,7 @@
 ﻿using EternityApp.Models;
 using EternityApp.Services;
 using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,8 +13,8 @@ namespace EternityApp.Views
         public LoginPage()
         {
             InitializeComponent();
-            Routing.RegisterRoute("//RegisterPage", typeof(RegisterPage));
-            Routing.RegisterRoute("//RestorePasswordPage", typeof(RestorePasswordPage));
+            Routing.RegisterRoute("RegisterPage", typeof(RegisterPage));
+            Routing.RegisterRoute("RestorePasswordPage", typeof(RestorePasswordPage));
         }
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
@@ -28,7 +29,9 @@ namespace EternityApp.Views
                 try
                 {
                     User currentUser = await userService.Get(Username.Text, Password.Text);
-                    Application.Current.Properties["id"] = currentUser.UserId;
+                    Application.Current.Properties["ID"] = currentUser.UserId;
+                    Application.Current.Properties["UserName"] = currentUser.UserName;
+                    (Application.Current.MainPage as AppShell).ViewModel.Username = currentUser.UserName;
                     await Shell.Current.GoToAsync("//MainPage");
                 }
                 catch
@@ -44,12 +47,12 @@ namespace EternityApp.Views
 
         private async void RegisterButton_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
+            await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
         }
 
         private async void RestorePassword_Tapped(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"//{nameof(RestorePasswordPage)}");
+            await Shell.Current.GoToAsync($"{nameof(RestorePasswordPage)}");
         }
     }
 }

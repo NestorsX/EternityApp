@@ -4,6 +4,9 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="EternityApp.Views.ProfilePage"
              Title="Профиль">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="icon_help.png" Text="Выход" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout x:Name="BusyLayout" IsVisible="false" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
@@ -23,17 +26,20 @@
                                 </Frame.GestureRecognizers>
                             </Frame>
                         </StackLayout>
-                        <StackLayout Padding="10" Margin="0,10,0,0">
+                        <StackLayout Padding="10" Margin="0,5,0,0">
+                            <Label x:Name="ErrorLabel" IsVisible="false" />
                             <Frame>
                                 <StackLayout>
                                     <Label Text="Смена email" FontSize="Medium" FontAttributes="Bold" />
                                     <Entry x:Name="Email" Placeholder="example@mail.com" />
+                                    <Label x:Name="EmailErrorLabel" IsVisible="False" />
                                 </StackLayout>
                             </Frame>
                             <Frame>
                                 <StackLayout>
                                     <Label Text="Смена логина" FontSize="Medium" FontAttributes="Bold" />
                                     <Entry x:Name="Username" Placeholder="Имя пользователя" />
+                                    <Label x:Name="UsernameErrorLabel" IsVisible="False" />
                                 </StackLayout>
                             </Frame>
                             <Frame>
@@ -42,9 +48,10 @@
                                     <Entry x:Name="OldPassword" Placeholder="Старый пароль" IsPassword="True"/>
                                     <Entry x:Name="NewPassword" Placeholder="Новый пароль" IsPassword="True"/>
                                     <Entry x:Name="NewPassword2" Placeholder="Повторите новый пароль" IsPassword="True"/>
+                                    <Label x:Name="PasswordErrorLabel" IsVisible="False" />
                                 </StackLayout>
                             </Frame>
-                            <Label x:Name="ErrorLabel" Text="Неверный логин или пароль!" IsVisible="False" Margin="0,20,0,0" />
+                            <Button x:Name="SaveChanges" Text="Сохранить" Clicked="SaveChanges_Clicked"/>
                         </StackLayout>
                     </StackLayout>
                 </ScrollView>
