@@ -1,13 +1,11 @@
-﻿using EternityApp.Models;
-using EternityApp.Views;
-using Xamarin.Essentials;
+﻿using EternityApp.Services;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace EternityApp
 {
     public partial class App : Application
     {
-
         public App()
         {
             InitializeComponent();
@@ -17,14 +15,23 @@ namespace EternityApp
         protected async override void OnStart()
         {
             base.OnStart();
-            if (!Application.Current.Properties.TryGetValue("ID", out object _))
+            if (await SecureStorage.GetAsync("ID") != null)
             {
-                await Shell.Current.GoToAsync("//Login");
+                (Application.Current.MainPage as AppShell).ViewModel.Username = await SecureStorage.GetAsync("Username");
+                try
+                {
+                    (Application.Current.MainPage as AppShell).ViewModel.ImageSource = await SecureStorage.GetAsync("ImageUri");
+                }
+                catch
+                {
+                    (Application.Current.MainPage as AppShell).ViewModel.ImageSource = "icon_no_avatar.png";
+                }
+
+                await Shell.Current.GoToAsync("//MainPage");
             }
             else
             {
-                (Application.Current.MainPage as AppShell).ViewModel.Username = Application.Current.Properties["UserName"].ToString();
-                await Shell.Current.GoToAsync("//MainPage");
+                await Shell.Current.GoToAsync("//Login");
             }
         }
 

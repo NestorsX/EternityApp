@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,9 +36,11 @@ namespace EternityApp.Views
                         UserName = Username.Text,
                         Email = Email.Text,
                         Password = Password.Text,
-                        RoleId = 1
+                        RoleId = 2
                     });
-                    Application.Current.Properties["id"] = currentUser.UserId;
+                    
+                    await SecureStorage.SetAsync("ID", currentUser.UserId.ToString());
+                    await SecureStorage.SetAsync("Username", currentUser.UserName);
                     await Shell.Current.GoToAsync("//MainPage");
                 }
                 catch

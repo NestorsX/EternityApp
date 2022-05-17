@@ -3,6 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:EternityApp.Views"
        xmlns:viewmodels="clr-namespace:EternityApp.Models" x:DataType="viewmodels:ShellHeaderViewModel"
+       xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
        Title="EternityApp"
        x:Class="EternityApp.AppShell"
        Shell.TabBarIsVisible="False">
@@ -66,7 +67,7 @@
             <StackLayout Padding="10">
                 <StackLayout VerticalOptions="EndAndExpand">
                     <Frame Padding="0" WidthRequest="100" HeightRequest="100" VerticalOptions="EndAndExpand" HorizontalOptions="Center" CornerRadius="50" >
-                        <Image Aspect="AspectFill" Source="icon_no_avatar.png" />
+                        <ffimageloading:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
                     </Frame>
                     <Label x:Name="UsernameLabel" Text="{Binding Username}" VerticalOptions="EndAndExpand" HorizontalOptions="Center" TextColor="White" FontAttributes="Bold" FontSize="24"/>
                 </StackLayout>
@@ -87,7 +88,7 @@
     <TabBar Route="Login">
         <ShellContent Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate local:LoginPage}" />
     </TabBar>
-    
+
     <Shell.FlyoutFooter>
         <Label Text="Прикасаясь к вечности" HeightRequest="25" HorizontalTextAlignment="Center" FontSize="16" />
     </Shell.FlyoutFooter>

@@ -1,8 +1,6 @@
-﻿using EternityApp.Interfaces;
-using EternityApp.Models;
+﻿using EternityApp.Models;
 using EternityApp.Services;
 using System;
-using System.IO;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using Xamarin.Essentials;
@@ -31,18 +29,17 @@ namespace EternityApp.Views
             BusyLayout.IsVisible = true;
             LoadingWheel.IsRunning = true;
             MainLayout.IsVisible = false;
+            _user = await _userService.Get(Convert.ToInt32(await SecureStorage.GetAsync("ID")));
+            Email.Text = _user.Email;
+            Username.Text = _user.UserName;
             try
             {
-                Image.Source = await _imageService.GetTitleImage("users", (int)Application.Current.Properties["ID"]);
+                Image.Source = await SecureStorage.GetAsync("ImageUri");
             }
             catch
             {
-                Image.Source = ImageSource.FromFile("icon_no_avatar.png");
+                Image.Source = "icon_no_avatar.png";
             }
-
-            _user = await _userService.Get((int)Application.Current.Properties["ID"]);
-            Email.Text = _user.Email;
-            Username.Text = _user.UserName;
 
             BusyLayout.IsVisible = false;
             LoadingWheel.IsRunning = false;
@@ -54,23 +51,29 @@ namespace EternityApp.Views
             BusyLayout.IsVisible = true;
             LoadingWheel.IsRunning = true;
             MainLayout.IsVisible = false;
-            Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
-            if (stream != null)
+            var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
             {
-                var fileContent = new StreamContent(stream);
+                Title = "Выберите фото"
+            });
+
+            if (result != null) 
+            {
                 var content = new MultipartFormDataContent
                 {
-                    { fileContent, "file", "avatar.png" }
+                    { new StreamContent(await result.OpenReadAsync()), "image", result.FileName }
                 };
 
-                await _imageService.PostUserImage((int)Application.Current.Properties["ID"], content);
+                await _imageService.PostUserImage((int)_user.UserId, content);
                 try
                 {
-                    Image.Source = await _imageService.GetTitleImage("users", (int)Application.Current.Properties["ID"]);
+                    await SecureStorage.SetAsync("ImageUri", $"http://eternity.somee.com/images/users/{(int)_user.UserId}/{await _imageService.GetTitleImage("users", (int)_user.UserId)}");
+                    Image.Source = await SecureStorage.GetAsync("ImageUri");
+                    (Application.Current.MainPage as AppShell).ViewModel.ImageSource = await SecureStorage.GetAsync("ImageUri");
                 }
                 catch
                 {
-                    Image.Source = ImageSource.FromFile("icon_no_avatar.png");
+                    Image.Source = "icon_no_avatar.png";
+                    (Application.Current.MainPage as AppShell).ViewModel.ImageSource = "icon_no_avatar.png";
                 }
             }
 
@@ -141,6 +144,7 @@ namespace EternityApp.Views
                 ErrorLabel.Text = ex.Message;
             }
 
+            await SecureStorage.SetAsync("Username", newUserName);
             BusyLayout.IsVisible = false;
             LoadingWheel.IsRunning = false;
             MainLayout.IsVisible = true;
@@ -151,7 +155,7 @@ namespace EternityApp.Views
             BusyLayout.IsVisible = true;
             LoadingWheel.IsRunning = true;
             MainLayout.IsVisible = false;
-            Application.Current.Properties.Remove("ID");
+            SecureStorage.RemoveAll();
             Application.Current.MainPage = new AppShell();
             await Shell.Current.GoToAsync("//Login");
             BusyLayout.IsVisible = false;

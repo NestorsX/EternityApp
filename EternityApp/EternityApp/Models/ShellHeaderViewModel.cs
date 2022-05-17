@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
+using Xamarin.Forms;
 
 namespace EternityApp.Models
 {
     public class ShellHeaderViewModel : INotifyPropertyChanged
     {
         private string _username;
+        private ImageSource _imageSource;
         public event PropertyChangedEventHandler PropertyChanged;
         public string Username
         {
@@ -16,6 +15,16 @@ namespace EternityApp.Models
             set
             {
                 _username = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ImageSource ImageSource
+        {
+            get { return _imageSource; }
+            set
+            {
+                _imageSource = value;
                 OnPropertyChanged();
             }
         }

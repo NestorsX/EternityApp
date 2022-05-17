@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -45,7 +46,7 @@ namespace EternityApp.Views
             _attractionsList = null;
             try
             {
-                IEnumerable<AttractionBookmark> bookmarks = await _bookmarkService.GetAttractionBookmarkList((int)Application.Current.Properties["id"]);
+                IEnumerable<AttractionBookmark> bookmarks = await _bookmarkService.GetAttractionBookmarkList(Convert.ToInt32(await SecureStorage.GetAsync("ID")));
                 _attractionsList = await _attractionService.Get();
                 var bookmarkedCities = new List<Attraction>();
                 foreach (var item in bookmarks)

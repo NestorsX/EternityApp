@@ -1,7 +1,9 @@
 ﻿using EternityApp.Models;
 using EternityApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -48,7 +50,7 @@ namespace EternityApp.Views
             TitleLabel.Text = _attraction.Title;
             ImageCarousel.ItemsSource = Images;
             DescriptionLabel.Text = _attraction.Description;
-            _bookmark = (await _bookmarkService.GetAttractionBookmarkList((int)Application.Current.Properties["id"])).FirstOrDefault(x => x.AttractionId == _id);
+            _bookmark = (await _bookmarkService.GetAttractionBookmarkList(Convert.ToInt32(await SecureStorage.GetAsync("ID")))).FirstOrDefault(x => x.AttractionId == _id);
             IsBookmarked = false;
             if (_bookmark != null)
             {
@@ -75,11 +77,11 @@ namespace EternityApp.Views
                 await _bookmarkService.AddAttractionBookmark(new AttractionBookmark
                 {
                     AttractionBookmarkId = null,
-                    UserId = (int)Application.Current.Properties["id"],
+                    UserId = Convert.ToInt32(await SecureStorage.GetAsync("ID")),
                     AttractionId = _id,
                 });
 
-                _bookmark = (await _bookmarkService.GetAttractionBookmarkList((int)Application.Current.Properties["id"])).FirstOrDefault(x => x.AttractionId == _id);
+                _bookmark = (await _bookmarkService.GetAttractionBookmarkList(Convert.ToInt32(await SecureStorage.GetAsync("ID")))).FirstOrDefault(x => x.AttractionId == _id);
                 IsBookmarked = true;
             }
 
