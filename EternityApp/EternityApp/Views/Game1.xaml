@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EternityApp.Views.Game1"
-             Title="Карточки">
+             Title="Найди пару">
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout x:Name="BusyLayout" IsVisible="false" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
@@ -30,6 +30,7 @@
                 <StackLayout VerticalOptions="CenterAndExpand" Padding="20">
                     <Label FontSize="Large" HorizontalTextAlignment="Center" Text="Ура! Вы отгадали все карточки!" />
                     <Label x:Name="TimeResult" FontSize="Large" HorizontalTextAlignment="Center" Text="Затраченное время: " />
+                    <Label x:Name="BestScore" FontSize="Large" Text="Лучший результат: " HorizontalTextAlignment="Center" VerticalOptions="Center" />
                 </StackLayout>
             </StackLayout>
         </AbsoluteLayout>

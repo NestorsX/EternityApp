@@ -32,11 +32,11 @@ namespace EternityApp.Views
             _user = await _userService.Get(Convert.ToInt32(await SecureStorage.GetAsync("ID")));
             Email.Text = _user.Email;
             Username.Text = _user.UserName;
-            try
+            if (await SecureStorage.GetAsync("ImageUri") != null)
             {
                 Image.Source = await SecureStorage.GetAsync("ImageUri");
             }
-            catch
+            else
             {
                 Image.Source = "icon_no_avatar.png";
             }

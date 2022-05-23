@@ -64,12 +64,19 @@
 
     <Shell.FlyoutHeader>
         <Grid BackgroundColor="{StaticResource TitleBackground}" HeightRequest="200">
-            <StackLayout Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Source="flyout_background.png" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"/>
+            <StackLayout Padding="10" Grid.Row="0" Grid.Column="0">
                 <StackLayout VerticalOptions="EndAndExpand">
-                    <Frame Padding="0" WidthRequest="100" HeightRequest="100" VerticalOptions="EndAndExpand" HorizontalOptions="Center" CornerRadius="50" >
+                    <Frame Padding="0" WidthRequest="100" HeightRequest="100" HorizontalOptions="Center" CornerRadius="50" >
                         <ffimageloading:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
                     </Frame>
-                    <Label x:Name="UsernameLabel" Text="{Binding Username}" VerticalOptions="EndAndExpand" HorizontalOptions="Center" TextColor="White" FontAttributes="Bold" FontSize="24"/>
+                    <Label x:Name="UsernameLabel" Text="{Binding Username}" HorizontalOptions="Center" TextColor="White" FontAttributes="Bold" FontSize="24"/>
                 </StackLayout>
             </StackLayout>
         </Grid>

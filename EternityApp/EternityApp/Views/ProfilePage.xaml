@@ -5,7 +5,7 @@
              x:Class="EternityApp.Views.ProfilePage"
              Title="Профиль">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="icon_help.png" Text="Выход" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem Icon="icon_exit.png" Text="Выход" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>

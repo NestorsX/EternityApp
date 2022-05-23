@@ -1,6 +1,8 @@
-﻿using System;
+﻿using EternityApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,13 +13,15 @@ namespace EternityApp.Views
     {
         private readonly List<string> _images = new List<string>
         {
-            "logo.png", "logo.png",
-            "icon_cities.png", "icon_cities.png",
-            "icon_attractions.png", "icon_attractions.png",
-            "icon_main.png", "icon_main.png",
-            "icon_no_avatar.png", "icon_no_avatar.png",
-            "icon_profile.png", "icon_profile.png"
+            "card1.jpg", "card1.jpg",
+            "card2.jpg", "card2.jpg",
+            "card3.jpg", "card3.jpg",
+            "card4.jpg", "card4.jpg",
+            "card5.jpg", "card5.jpg",
+            "card6.jpg", "card6.jpg"
         };
+
+        private readonly GameScoreService _gameScoreService;
 
         public Game1()
         {
@@ -25,6 +29,7 @@ namespace EternityApp.Views
             BusyLayout.IsVisible = true;
             MainLayout.IsVisible = false;
             LoadingWheel.IsRunning = true;
+            _gameScoreService = new GameScoreService();
             AssignImagesToGrid();
             BusyLayout.IsVisible = false;
             MainLayout.IsVisible = true;
@@ -81,13 +86,13 @@ namespace EternityApp.Views
         private int minutes = 0;
         private int seconds = 0;
 
-        private void Card_Tapped(object sender, EventArgs e)
+        private async void Card_Tapped(object sender, EventArgs e)
         {
 
             if (firstTapped != null && secondTapped != null)
                 return;
 
-            StackLayout card = sender as StackLayout;
+            var card = sender as StackLayout;
             if (card == null)
                 return;
 
@@ -115,6 +120,16 @@ namespace EternityApp.Views
                 {
                     isEndGame = true;
                     TimeResult.Text = string.Format($"Время: {minutes:00}:{seconds:00}");
+                    await _gameScoreService.Add(new Models.AddGameScore
+                    {
+                        GameId = 1,
+                        UserId = Convert.ToInt32(await SecureStorage.GetAsync("ID")),
+                        Score = string.Format($"{minutes:00}:{seconds:00}")
+
+                    });
+
+                    Models.GameScore gameScore = await _gameScoreService.Get(1);
+                    BestScore.Text = $"Лучший результат:\n {gameScore.UserName} - {gameScore.Score}";
                     MainLayout.IsVisible = false;
                     GoBackLayout.IsVisible = true;
                 }
