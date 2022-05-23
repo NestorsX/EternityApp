@@ -10,7 +10,7 @@
             </StackLayout>
             <ScrollView>
                 <StackLayout x:Name="MainLayout" VerticalOptions="Fill" HorizontalOptions="Fill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                    <Grid x:Name="GameGrid" Padding="5" >
+                    <Grid x:Name="GameGrid" Padding="5" HorizontalOptions="CenterAndExpand" VerticalOptions="Start">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="3*"/>
@@ -23,11 +23,13 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                     </Grid>
+                    <Label x:Name="Stopwatch" FontSize="Large" HorizontalTextAlignment="Center" VerticalOptions="EndAndExpand" />
                 </StackLayout>
             </ScrollView>
             <StackLayout x:Name="GoBackLayout" IsVisible="false" VerticalOptions="Fill" HorizontalOptions="Fill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout VerticalOptions="CenterAndExpand" Padding="20">
-                    <Label HorizontalOptions="Center" Text="Ура! Вы отгадали все карточки!" />
+                    <Label FontSize="Large" HorizontalTextAlignment="Center" Text="Ура! Вы отгадали все карточки!" />
+                    <Label x:Name="TimeResult" FontSize="Large" HorizontalTextAlignment="Center" Text="Затраченное время: " />
                 </StackLayout>
             </StackLayout>
         </AbsoluteLayout>

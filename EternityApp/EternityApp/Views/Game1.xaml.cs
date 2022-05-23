@@ -70,15 +70,20 @@ namespace EternityApp.Views
                     col = 0;
                 }
             }
-            
+
+            Device.StartTimer(TimeSpan.FromSeconds(1), OnStopwatchTick);
         }
 
-        int cardsLeft = 6;
+        private int cardsLeft = 6;
         private StackLayout firstTapped = null;
         private StackLayout secondTapped = null;
+        private bool isEndGame = false;
+        private int minutes = 0;
+        private int seconds = 0;
 
         private void Card_Tapped(object sender, EventArgs e)
         {
+
             if (firstTapped != null && secondTapped != null)
                 return;
 
@@ -108,6 +113,8 @@ namespace EternityApp.Views
                 cardsLeft -= 1;
                 if (cardsLeft == 0)
                 {
+                    isEndGame = true;
+                    TimeResult.Text = string.Format($"Время: {minutes:00}:{seconds:00}");
                     MainLayout.IsVisible = false;
                     GoBackLayout.IsVisible = true;
                 }
@@ -127,6 +134,24 @@ namespace EternityApp.Views
             firstTapped = null;
             secondTapped = null;
             return false;
+        }
+
+        private bool OnStopwatchTick()
+        {
+            if (isEndGame)
+            {
+                return false;
+            }
+
+            seconds++;
+            if(seconds == 60)
+            {
+                seconds = 0;
+                minutes++;
+            }
+
+            Stopwatch.Text = string.Format($"Время: {minutes:00}:{seconds:00}");
+            return true;
         }
     }
 }

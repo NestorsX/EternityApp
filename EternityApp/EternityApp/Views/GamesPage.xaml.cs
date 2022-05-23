@@ -22,15 +22,5 @@ namespace EternityApp.Views
         {
             await Shell.Current.GoToAsync($"//{nameof(Game1)}");
         }
-
-        private void Game2_Tapped(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Game3_Tapped(object sender, EventArgs e)
-        {
-
-        }
     }
 }

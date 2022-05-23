@@ -19,32 +19,6 @@
                         <TapGestureRecognizer Tapped="Game1_Tapped" />
                     </Frame.GestureRecognizers>
                 </Frame>
-                <Frame CornerRadius="25" Padding="0" Margin="10" BackgroundColor="{StaticResource Primary}">
-                    <StackLayout Padding="0">
-                        <Label Text="Игра2" TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
-                        <Frame CornerRadius="25" HeightRequest="200" Padding="5">
-                            <StackLayout Padding="0" BackgroundColor="Transparent">
-                                <Image Source="icon_help.png" HeightRequest="200"/>
-                            </StackLayout>
-                        </Frame>
-                    </StackLayout>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Game2_Tapped" />
-                    </Frame.GestureRecognizers>
-                </Frame>
-                <Frame CornerRadius="25" Padding="0" Margin="10" BackgroundColor="{StaticResource Primary}">
-                    <StackLayout Padding="0">
-                        <Label Text="Игра3" TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
-                        <Frame CornerRadius="25" HeightRequest="200" Padding="5">
-                            <StackLayout Padding="0" BackgroundColor="Transparent">
-                                <Image Source="icon_help.png" HeightRequest="200"/>
-                            </StackLayout>
-                        </Frame>
-                    </StackLayout>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Game3_Tapped" />
-                    </Frame.GestureRecognizers>
-                </Frame>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
