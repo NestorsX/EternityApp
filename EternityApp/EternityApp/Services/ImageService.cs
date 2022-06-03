@@ -9,7 +9,7 @@ namespace EternityApp.Services
 {
     public class ImageService
     {
-        private const string _url = "http://eternity.somee.com/api/images";
+        private const string _url = AppSettings.Url + "api/images/";
         private readonly JsonSerializerOptions _options;
         private readonly HttpClient _client;
         public ImageService()

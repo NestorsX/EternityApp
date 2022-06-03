@@ -3,6 +3,7 @@ using EternityApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,11 +16,12 @@ namespace EternityApp.Views
     {
         private readonly CityService _cityService;
         private readonly ImageService _imageService;
-        private readonly BookmarkService _bookmarkService;
+        private readonly ActionItemService _actionItemService;
         private City _city;
         private int _id;
-        private CityBookmark _bookmark;
-        private bool IsBookmarked { get; set; }
+        private bool _isBookmarked;
+        private bool _isPinned;
+        private bool _isViewed;
 
         public new int Id
         {
@@ -36,7 +38,7 @@ namespace EternityApp.Views
             InitializeComponent();
             _cityService = new CityService();
             _imageService = new ImageService();
-            _bookmarkService = new BookmarkService();
+            _actionItemService = new ActionItemService();
         }
 
         protected override async void OnAppearing()
@@ -50,11 +52,28 @@ namespace EternityApp.Views
             TitleLabel.Text = _city.Title;
             ImageCarousel.ItemsSource = Images;
             DescriptionLabel.Text = _city.Description;
-            _bookmark = (await _bookmarkService.GetCityBookmarkList(Convert.ToInt32(await SecureStorage.GetAsync("ID")))).FirstOrDefault(x => x.CityId == _id);
-            IsBookmarked = false;
-            if (_bookmark != null)
+            _isBookmarked = (await _actionItemService.GetAction(1, 1)).Any(x => x.ItemId == _city.CityId);
+            _isPinned = (await _actionItemService.GetAction(1, 2)).Any(x => x.ItemId == _city.CityId);
+            _isViewed = (await _actionItemService.GetAction(1, 3)).Any(x => x.ItemId == _city.CityId);
+            BusyLayout.IsVisible = false;
+            MainLayout.IsVisible = true;
+            LoadingWheel.IsRunning = false;
+        }
+
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            BusyLayout.IsVisible = true;
+            MainLayout.IsVisible = false;
+            LoadingWheel.IsRunning = true;
+            if (_isBookmarked)
             {
-                IsBookmarked = true;
+                await _actionItemService.DeleteAction(1, 1, (int)_city.CityId);
+                _isBookmarked = false;
+            }
+            else
+            {
+                await _actionItemService.AddAction(1, 1, (int)_city.CityId);
+                _isBookmarked = true;
             }
 
             BusyLayout.IsVisible = false;
@@ -62,32 +81,40 @@ namespace EternityApp.Views
             LoadingWheel.IsRunning = false;
         }
 
-        private async void ToolbarItem_Clicked(object sender, System.EventArgs e)
+        private async void PinButton_Tapped(object sender, EventArgs e)
         {
-            BusyLayout.IsVisible = true;
-            MainLayout.IsVisible = false;
-            LoadingWheel.IsRunning = true;
-            if (IsBookmarked)
+            if (_isPinned)
             {
-                await _bookmarkService.DeleteCityBookmark((int)_bookmark.CityBookmarkId);
-                IsBookmarked = false;
+                _isPinned = false;
+                await _actionItemService.DeleteAction(1, 2, (int)_city.CityId);
+                DependencyService.Get<IToast>().Show("Хочу посетить это место");
             }
             else
             {
-                await _bookmarkService.AddCityBookmark(new CityBookmark
-                {
-                    CityBookmarkId = null,
-                    UserId = Convert.ToInt32(await SecureStorage.GetAsync("ID")),
-                    CityId = _id,
-                });
-
-                _bookmark = (await _bookmarkService.GetCityBookmarkList(Convert.ToInt32(await SecureStorage.GetAsync("ID")))).FirstOrDefault(x => x.CityId == _id);
-                IsBookmarked = true;
+                _isPinned = true;
+                await _actionItemService.AddAction(1, 2, (int)_city.CityId);
+                DependencyService.Get<IToast>().Show("Хочу посетить это место");
             }
 
-            BusyLayout.IsVisible = false;
-            MainLayout.IsVisible = true;
-            LoadingWheel.IsRunning = false;
+            PinButton.Source = _isPinned ? "icon_filledPin.png" : "icon_emptyPin.png";  
+        }
+
+        private async void EyeButton_Tapped(object sender, EventArgs e)
+        {
+            if (_isViewed)
+            {
+                _isViewed = false;
+                await _actionItemService.DeleteAction(1, 3, (int)_city.CityId);
+                DependencyService.Get<IToast>().Show("Видел(а) это место");
+            }
+            else
+            {
+                _isViewed = true;
+                await _actionItemService.AddAction(1, 3, (int)_city.CityId);
+                DependencyService.Get<IToast>().Show("Не видел(а) это место");
+            }
+
+            EyeButton.Source = _isViewed ? "icon_filledEye.png" : "icon_emptyEye.png";
         }
     }
 }

@@ -15,7 +15,7 @@ namespace EternityApp.Views
     {
         private readonly CityService _cityService;
         private readonly ImageService _imageService;
-        private readonly BookmarkService _bookmarkService;
+        private readonly ActionItemService _actionItemService;
         private IEnumerable<City> _citiesList;
 
         public CityBookmarksPage()
@@ -23,7 +23,7 @@ namespace EternityApp.Views
             InitializeComponent();
             _cityService = new CityService();
             _imageService = new ImageService();
-            _bookmarkService = new BookmarkService();
+            _actionItemService = new ActionItemService();
             Routing.RegisterRoute("/CurrentCityPage", typeof(CurrentCityPage));
         }
 
@@ -46,18 +46,18 @@ namespace EternityApp.Views
             _citiesList = null;
             try
             {
-                IEnumerable<CityBookmark> bookmarks = await _bookmarkService.GetCityBookmarkList(Convert.ToInt32(await SecureStorage.GetAsync("ID")));
+                IEnumerable<DataAction> bookmarks = await _actionItemService.GetAction(1, 1);
                 _citiesList = await _cityService.Get();
                 var bookmarkedCities = new List<City>();
                 foreach (var item in bookmarks)
                 {
-                    bookmarkedCities.Add(_citiesList.First(x => x.CityId == item.CityId));
+                    bookmarkedCities.Add(_citiesList.First(x => x.CityId == item.ItemId));
                 }
 
                 _citiesList = bookmarkedCities;
                 foreach (var item in _citiesList)
                 {
-                    item.TitleImagePath = $"http://eternity.somee.com/images/cities/{item.CityId}/{await _imageService.GetTitleImage("cities", (int)item.CityId)}";
+                    item.TitleImagePath = $"{AppSettings.Url}images/cities/{item.CityId}/{await _imageService.GetTitleImage("cities", (int)item.CityId)}";
                 }
 
                 citiesList.ItemsSource = _citiesList;

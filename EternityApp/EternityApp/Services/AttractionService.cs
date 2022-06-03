@@ -8,7 +8,7 @@ namespace EternityApp.Services
 {
     public class AttractionService
     {
-        private const string _url = "http://eternity.somee.com/api/Attractions/";
+        private const string _url = AppSettings.Url + "api/Attractions/";
         private readonly JsonSerializerOptions _options;
         private readonly HttpClient _client;
         public AttractionService()

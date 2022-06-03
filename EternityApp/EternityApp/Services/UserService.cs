@@ -9,7 +9,7 @@ namespace EternityApp.Services
 {
     public class UserService
     {
-        private const string _url = "http://eternity.somee.com/api/Users/";
+        private const string _url = AppSettings.Url + "api/Users/";
         private readonly JsonSerializerOptions _options;
         private readonly HttpClient _client;
         public UserService()

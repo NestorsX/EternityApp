@@ -31,6 +31,18 @@
                                     </DataTemplate>
                                 </CarouselView.ItemTemplate>
                             </CarouselView>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="End" >
+                                <Image x:Name="PinButton" Source="icon_emptyPin.png" WidthRequest="40" HeightRequest="40" HorizontalOptions="End" >
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="PinButton_Tapped" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Image x:Name="EyeButton" Source="icon_emptyEye.png" WidthRequest="40" HeightRequest="40" HorizontalOptions="End" >
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="EyeButton_Tapped" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
                             <Label x:Name="DescriptionLabel" LineBreakMode="WordWrap" FontSize="16" TextColor="{StaticResource TextColor}" />
                         </StackLayout>
                     </ScrollView>

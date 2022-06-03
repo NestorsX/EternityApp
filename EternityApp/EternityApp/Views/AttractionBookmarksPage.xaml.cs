@@ -15,7 +15,7 @@ namespace EternityApp.Views
     {
         private readonly AttractionService _attractionService;
         private readonly ImageService _imageService;
-        private readonly BookmarkService _bookmarkService;
+        private readonly ActionItemService _actionItemService;
         private IEnumerable<Attraction> _attractionsList;
 
         public AttractionBookmarksPage()
@@ -23,7 +23,7 @@ namespace EternityApp.Views
             InitializeComponent();
             _attractionService = new AttractionService();
             _imageService = new ImageService();
-            _bookmarkService = new BookmarkService();
+            _actionItemService = new ActionItemService();
             Routing.RegisterRoute("/CurrentAttractionPage", typeof(CurrentAttractionPage));
         }
 
@@ -46,18 +46,18 @@ namespace EternityApp.Views
             _attractionsList = null;
             try
             {
-                IEnumerable<AttractionBookmark> bookmarks = await _bookmarkService.GetAttractionBookmarkList(Convert.ToInt32(await SecureStorage.GetAsync("ID")));
+                IEnumerable<DataAction> bookmarks = await _actionItemService.GetAction(2, 1);
                 _attractionsList = await _attractionService.Get();
                 var bookmarkedCities = new List<Attraction>();
                 foreach (var item in bookmarks)
                 {
-                    bookmarkedCities.Add(_attractionsList.First(x => x.AttractionId == item.AttractionId));
+                    bookmarkedCities.Add(_attractionsList.First(x => x.AttractionId == item.ItemId));
                 }
 
                 _attractionsList = bookmarkedCities;
                 foreach (var item in _attractionsList)
                 {
-                    item.TitleImagePath = $"http://eternity.somee.com/images/attractions/{item.AttractionId}/{await _imageService.GetTitleImage("attractions", (int)item.AttractionId)}";
+                    item.TitleImagePath = $"{AppSettings.Url}images/attractions/{item.AttractionId}/{await _imageService.GetTitleImage("attractions", (int)item.AttractionId)}";
                 }
 
                 attractionsList.ItemsSource = _attractionsList;

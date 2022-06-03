@@ -8,7 +8,7 @@ namespace EternityApp.Services
 {
     public class CityService
     {
-        private const string _url = "http://eternity.somee.com/api/Cities/";
+        private const string _url = AppSettings.Url + "api/Cities/";
         private readonly JsonSerializerOptions _options;
         private readonly HttpClient _client;
         public CityService()

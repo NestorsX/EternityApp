@@ -10,6 +10,7 @@
                 <ActivityIndicator x:Name="LoadingWheel" IsRunning="False" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
             </StackLayout>
             <StackLayout x:Name="MainLayout" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <SearchBar Placeholder="Поиск по достопримечательностям" TextChanged="SearchBar_TextChanged" VerticalOptions="Start" HorizontalOptions="Fill"></SearchBar>
                 <Label x:Name="NoData" Text="К сожалению, здесь ничего нет :(" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsVisible="False" />
                 <ListView x:Name="attractionsList" HasUnevenRows="True" SelectionMode="None" IsPullToRefreshEnabled="True" Refreshing="attractionsList_Refreshing" ItemTapped="attractionsList_ItemTapped">
                     <ListView.ItemTemplate>

@@ -8,7 +8,7 @@ namespace EternityApp.Services
 {
     public class GameScoreService
     {
-        private const string _url = "http://eternity.somee.com/api/GameScores/";
+        private const string _url = AppSettings.Url + "api/GameScores/";
         private readonly JsonSerializerOptions _options;
         private readonly HttpClient _client;
         public GameScoreService()
