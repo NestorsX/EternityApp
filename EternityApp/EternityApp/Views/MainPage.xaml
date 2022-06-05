@@ -1,11 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:EternityApp.Controls;assembly=EternityApp"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="EternityApp.Views.MainPage"
              Title="Главная">
     <ContentPage.Content>
-        <StackLayout>
-            
-        </StackLayout>
+        <AbsoluteLayout>
+            <StackLayout x:Name="BusyLayout" IsVisible="false" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ActivityIndicator x:Name="LoadingWheel" IsRunning="False" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            <StackLayout x:Name="MainLayout" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <RefreshView x:Name="RefreshView" Refreshing="RefreshView_Refreshing">
+                    <ScrollView>
+                        <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <controls:JustifiedLabel Text="Тут текст какой-то" JustifyText="True" TextColor="{StaticResource TextColor}" FontSize="Medium" FontAttributes="Bold" />
+                            <Label Text="Лучшие результаты игр:" FontSize="Medium" FontAttributes="Bold" Margin="0,20,0,0" />
+                            <StackLayout x:Name="Game1BestScore" Margin="0,5,0,5">
+                                <Frame CornerRadius="25" Padding="0" BackgroundColor="{StaticResource Primary}">
+                                    <StackLayout Padding="0">
+                                        <Label Text='Игра "Найди пару"' TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
+                                        <Frame CornerRadius="25" Padding="0">
+                                            <StackLayout Padding="10" Orientation="Horizontal" BackgroundColor="Transparent">
+                                                <StackLayout x:Name="Game1Result" IsVisible="true" Padding="0" Orientation="Horizontal" BackgroundColor="Transparent">
+                                                    <Frame WidthRequest="70" HeightRequest="70" CornerRadius="70" Padding="0">
+                                                        <ffimageloading:CachedImage x:Name="Game1UserImage" Source="icon_no_avatar.png" WidthRequest="70" HeightRequest="70" Aspect="AspectFill" />
+                                                    </Frame>
+                                                    <StackLayout VerticalOptions="Center">
+                                                        <Label x:Name="Game1UserName" Text="di.dm" FontSize="Medium" FontAttributes="Bold" />
+                                                        <Label x:Name="Game1UserScore" Text="4 правильных ответа" FontSize="Medium" FontAttributes="Bold" />
+                                                    </StackLayout>
+                                                </StackLayout>
+                                                <Label x:Name="Game1NoResult" IsVisible="false" Text="Еще никто не играл в эту игру" HorizontalOptions="CenterAndExpand" FontSize="Medium" FontAttributes="Bold" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                            <StackLayout x:Name="Game2BestScore" Margin="0,5,0,5">
+                                <Frame CornerRadius="25" Padding="0" BackgroundColor="{StaticResource Primary}">
+                                    <StackLayout Padding="0">
+                                        <Label Text='Игра "Мини-тест"' TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
+                                        <Frame CornerRadius="25" Padding="0">
+                                            <StackLayout Padding="10" Orientation="Horizontal" BackgroundColor="Transparent">
+                                                <StackLayout x:Name="Game2Result" IsVisible="true" Padding="0" Orientation="Horizontal" BackgroundColor="Transparent">
+                                                    <Frame WidthRequest="70" HeightRequest="70" CornerRadius="70" Padding="0">
+                                                        <ffimageloading:CachedImage x:Name="Game2UserImage" Source="icon_no_avatar.png" WidthRequest="70" HeightRequest="70" Aspect="AspectFill" />
+                                                    </Frame>
+                                                    <StackLayout VerticalOptions="Center">
+                                                        <Label x:Name="Game2UserName" Text="di.dm" FontSize="Medium" FontAttributes="Bold" />
+                                                        <Label x:Name="Game2UserScore" Text="4 правильных ответа" FontSize="Medium" FontAttributes="Bold" />
+                                                    </StackLayout>
+                                                </StackLayout>
+                                                <Label x:Name="Game2NoResult" IsVisible="false" Text="Еще никто не играл в эту игру" HorizontalOptions="CenterAndExpand" FontSize="Medium" FontAttributes="Bold" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+                </RefreshView>
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
