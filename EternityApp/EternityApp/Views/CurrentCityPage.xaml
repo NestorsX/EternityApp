@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:EternityApp.Controls;assembly=EternityApp"
+             xmlns:models="clr-namespace:EternityApp.Models;assembly=EternityApp"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="EternityApp.Views.CurrentCityPage"
              Title="Города">
@@ -43,7 +45,21 @@
                                     </Image.GestureRecognizers>
                                 </Image>
                             </StackLayout>
-                            <Label x:Name="DescriptionLabel" LineBreakMode="WordWrap" FontSize="16" TextColor="{StaticResource TextColor}" />
+                            <StackLayout x:Name="References" IsVisible="False" >
+                                <Label Text="Здесь находится:" FontSize="22" FontAttributes="Bold" TextColor="{StaticResource TextColor}" />
+                                <StackLayout x:Name="AttractionReferences">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Attraction">
+                                            <Label Text="{Binding Title}" FontSize="22" TextColor="{StaticResource Primary}" >
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding BindingContext.ItemTappedCommand, Source={x:Reference AttractionReferences}}" CommandParameter="{Binding .}" />
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </StackLayout>
+                            <controls:JustifiedLabel x:Name="DescriptionLabel" JustifyText="True" LineBreakMode="WordWrap" FontSize="16" TextColor="{StaticResource TextColor}" />
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>

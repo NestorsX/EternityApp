@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:EternityApp.Controls;assembly=EternityApp"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="EternityApp.Views.CurrentAttractionPage"
              Title="Достопримечательности">
@@ -43,7 +44,15 @@
                                     </Image.GestureRecognizers>
                                 </Image>
                             </StackLayout>
-                            <Label x:Name="DescriptionLabel" LineBreakMode="WordWrap" FontSize="16" TextColor="{StaticResource TextColor}" />
+                            <StackLayout x:Name="References" IsVisible="False" >
+                                <Label Text="Город:" FontSize="22" FontAttributes="Bold" TextColor="{StaticResource TextColor}" />
+                                <Label x:Name="CityReference" FontSize="22" TextColor="{StaticResource Primary}" >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>
+                            <controls:JustifiedLabel x:Name="DescriptionLabel" JustifyText="True" LineBreakMode="WordWrap" FontSize="16" TextColor="{StaticResource TextColor}" />
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>

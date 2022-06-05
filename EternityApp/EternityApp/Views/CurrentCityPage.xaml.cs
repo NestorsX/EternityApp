@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,9 +15,12 @@ namespace EternityApp.Views
     public partial class CurrentCityPage : ContentPage
     {
         private readonly CityService _cityService;
+        private readonly AttractionService _attractionService;
         private readonly ImageService _imageService;
         private readonly ActionItemService _actionItemService;
+        public AsyncCommand<Attraction> ItemTappedCommand { get; }
         private City _city;
+        private IEnumerable<Attraction> _attractions;
         private int _id;
         private bool _isBookmarked;
         private bool _isPinned;
@@ -36,9 +39,13 @@ namespace EternityApp.Views
         public CurrentCityPage()
         {
             InitializeComponent();
+            BindingContext = this;
             _cityService = new CityService();
+            _attractionService = new AttractionService();
             _imageService = new ImageService();
             _actionItemService = new ActionItemService();
+            ItemTappedCommand = new AsyncCommand<Attraction>(Reference_Tapped);
+            Routing.RegisterRoute("/CurrentAttractionPage", typeof(CurrentAttractionPage));
         }
 
         protected override async void OnAppearing()
@@ -55,6 +62,21 @@ namespace EternityApp.Views
             _isBookmarked = (await _actionItemService.GetAction(1, 1)).Any(x => x.ItemId == _city.CityId);
             _isPinned = (await _actionItemService.GetAction(1, 2)).Any(x => x.ItemId == _city.CityId);
             _isViewed = (await _actionItemService.GetAction(1, 3)).Any(x => x.ItemId == _city.CityId);
+            PinButton.Source = _isPinned ? "icon_filledPin.png" : "icon_emptyPin.png";
+            EyeButton.Source = _isViewed ? "icon_filledEye.png" : "icon_emptyEye.png";
+            if (_city.References.Count() > 0)
+            {
+                References.IsVisible = true;
+                var attractionList = await _attractionService.Get();
+                _attractions = new List<Attraction>();
+                foreach (var item in _city.References)
+                {
+                    _attractions = _attractions.Append(attractionList.First(x => x.AttractionId == item));
+                }
+
+                BindableLayout.SetItemsSource(AttractionReferences, attractionList);
+            }
+
             BusyLayout.IsVisible = false;
             MainLayout.IsVisible = true;
             LoadingWheel.IsRunning = false;
@@ -69,11 +91,13 @@ namespace EternityApp.Views
             {
                 await _actionItemService.DeleteAction(1, 1, (int)_city.CityId);
                 _isBookmarked = false;
+                DependencyService.Get<IToast>().Show("Место удалено из закладок");
             }
             else
             {
                 await _actionItemService.AddAction(1, 1, (int)_city.CityId);
                 _isBookmarked = true;
+                DependencyService.Get<IToast>().Show("Место добавлено в закладки");
             }
 
             BusyLayout.IsVisible = false;
@@ -87,7 +111,7 @@ namespace EternityApp.Views
             {
                 _isPinned = false;
                 await _actionItemService.DeleteAction(1, 2, (int)_city.CityId);
-                DependencyService.Get<IToast>().Show("Хочу посетить это место");
+                DependencyService.Get<IToast>().Show("Пока не хочу посещать это место");
             }
             else
             {
@@ -105,16 +129,21 @@ namespace EternityApp.Views
             {
                 _isViewed = false;
                 await _actionItemService.DeleteAction(1, 3, (int)_city.CityId);
-                DependencyService.Get<IToast>().Show("Видел(а) это место");
+                DependencyService.Get<IToast>().Show("Все-таки пока не увидел(а) это место :(");
             }
             else
             {
                 _isViewed = true;
                 await _actionItemService.AddAction(1, 3, (int)_city.CityId);
-                DependencyService.Get<IToast>().Show("Не видел(а) это место");
+                DependencyService.Get<IToast>().Show("Я увидел(а) это место!");
             }
 
             EyeButton.Source = _isViewed ? "icon_filledEye.png" : "icon_emptyEye.png";
+        }
+
+        private async Task Reference_Tapped(Attraction sender)
+        {
+            await Shell.Current.GoToAsync($"/CurrentAttractionPage?id={(int)sender.AttractionId}");
         }
     }
 }
