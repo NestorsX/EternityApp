@@ -66,7 +66,7 @@ namespace EternityApp.Views
                 await _imageService.PostUserImage((int)_user.UserId, content);
                 try
                 {
-                    await SecureStorage.SetAsync("ImageUri", $"http://eternity.somee.com/images/users/{(int)_user.UserId}/{await _imageService.GetTitleImage("users", (int)_user.UserId)}");
+                    await SecureStorage.SetAsync("ImageUri", $"{AppSettings.Url}images/users/{(int)_user.UserId}/{await _imageService.GetTitleImage("users", (int)_user.UserId)}");
                     Image.Source = await SecureStorage.GetAsync("ImageUri");
                     (Application.Current.MainPage as AppShell).ViewModel.ImageSource = await SecureStorage.GetAsync("ImageUri");
                 }

@@ -18,7 +18,7 @@
                         <StackLayout VerticalOptions="Start" HeightRequest="150" BackgroundColor="{StaticResource TitleBackground}" Padding="0">
                             <Frame Padding="0" WidthRequest="120" HeightRequest="120" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" CornerRadius="120" >
                                 <StackLayout Padding="0" BackgroundColor="Transparent">
-                                    <ffimageloading:CachedImage x:Name="Image" Source="icon_no_avatar.png" Aspect="AspectFill"/>
+                                    <ffimageloading:CachedImage x:Name="Image" Source="icon_no_avatar.png" WidthRequest="120" HeightRequest="120" Aspect="AspectFill"/>
                                     <ActivityIndicator BindingContext="{x:Reference Image}" IsRunning="{Binding IsLoading}"  IsVisible="{Binding IsLoading}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
                                 </StackLayout>
                                 <Frame.GestureRecognizers>

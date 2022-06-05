@@ -1,6 +1,4 @@
 ﻿using EternityApp.Models;
-using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace EternityApp
 {
@@ -11,7 +9,7 @@ namespace EternityApp
         {
             InitializeComponent();
             ViewModel = new ShellHeaderViewModel();
-            this.BindingContext = ViewModel;
+            BindingContext = ViewModel;
         }
     }
 }
