@@ -82,14 +82,30 @@
         </Grid>
     </Shell.FlyoutHeader>
 
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Главная" Icon="icon_main.png" Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
-        <ShellContent Title="Города" Icon="icon_cities.png" Route="CitiesPage" ContentTemplate="{DataTemplate local:CitiesPage}" />
-        <ShellContent Title="Достопримечательности" Icon="icon_attractions.png" Route="AttractionsPage" ContentTemplate="{DataTemplate local:AttractionsPage}" />
-        <ShellContent Title="Игры" Icon="icon_game.png" Route="GamesPage" ContentTemplate="{DataTemplate local:GamesPage}" />
-        <ShellContent Title="Профиль" Icon="icon_profile.png" Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
-        <ShellContent Title="Закладки" Icon="icon_saved.png" Route="SavedPage" ContentTemplate="{DataTemplate local:SavedPage}" />
-        <ShellContent Title="О приложении" Icon="icon_help.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+    <FlyoutItem Title="Главная" Icon="icon_main.png">
+        <ShellSection>
+            <ShellContent Title="Главная" Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
+            <ShellContent Title="Хочу посетить" Route="PinPage" ContentTemplate="{DataTemplate local:PinPage}" />
+            <ShellContent Title="Посещенные" Route="ViewPage" ContentTemplate="{DataTemplate local:ViewPage}" />
+        </ShellSection>
+    </FlyoutItem>
+    <FlyoutItem Title="Города" Icon="icon_cities.png" Route="CitiesPage">
+        <ShellContent ContentTemplate="{DataTemplate local:CitiesPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Достопримечательности" Icon="icon_attractions.png" Route="AttractionsPage">
+        <ShellContent ContentTemplate="{DataTemplate local:AttractionsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Игры" Icon="icon_game.png" Route="GamesPage">
+        <ShellContent ContentTemplate="{DataTemplate local:GamesPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Профиль" Icon="icon_profile.png" Route="ProfilePage">
+        <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Закладки" Icon="icon_saved.png" Route="SavedPage">
+        <ShellContent ContentTemplate="{DataTemplate local:SavedPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="О приложении" Icon="icon_help.png" Route="AboutPage">
+        <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
 
     <TabBar Route="Login">

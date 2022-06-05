@@ -35,5 +35,9 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+        </Style>
     </Application.Resources>
 </Application>

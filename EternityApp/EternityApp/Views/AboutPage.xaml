@@ -4,10 +4,10 @@
              x:Class="EternityApp.Views.AboutPage"
              Title="О приложении">
     <ContentPage.Content>
-        <StackLayout>
-            <Image Source="icon_cities.png" WidthRequest="200" HorizontalOptions="CenterAndExpand" />
-            <Label Text="Прикасаясь к вечности" HorizontalOptions="CenterAndExpand" FontSize="24" FontAttributes="Bold" />
-            <Label x:Name="InfoLabel" FontSize="16" HorizontalTextAlignment="Center"/>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Image Source="icon_cities.png" WidthRequest="300" HorizontalOptions="CenterAndExpand" />
+            <Label Text="Прикасаясь к вечности" HorizontalOptions="CenterAndExpand" FontSize="Title" FontAttributes="Bold" />
+            <Label x:Name="InfoLabel" FontSize="Subtitle" HorizontalTextAlignment="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
