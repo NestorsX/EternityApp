@@ -40,8 +40,6 @@ namespace EternityApp.Views
         private async Task GetItemsList()
         {
             NoData.IsVisible = false;
-            citiesList.ItemsSource = null;
-            _citiesList = null;
             try
             {
                 _citiesList = await _cityService.Get();
