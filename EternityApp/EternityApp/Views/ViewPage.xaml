@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:EternityApp.Models;assembly=EternityApp"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="EternityApp.Views.ViewPage"
+             Title="Главная">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout x:Name="BusyLayout" IsVisible="false" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ActivityIndicator x:Name="LoadingWheel" IsRunning="False" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            <StackLayout x:Name="MainLayout" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <RefreshView x:Name="RefreshView" Refreshing="RefreshView_Refreshing">
+                    <ScrollView>
+                        <StackLayout>
+                            <StackLayout x:Name="CityPinsList" >
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="model:City">
+                                        <StackLayout Orientation="Horizontal">
+                                            <ffimageloading:CachedImage Source="{Binding TitleImagePath}" WidthRequest="120"/>
+                                            <Label Text="{Binding Title}" FontAttributes="Bold" VerticalOptions="Center" FontSize="25"/>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.CityItemTappedCommand, Source={x:Reference CityPinsList}}" CommandParameter="{Binding .}" />
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                            <StackLayout x:Name="AttractionPinsList">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Attraction">
+                                        <StackLayout Orientation="Horizontal">
+                                            <ffimageloading:CachedImage Source="{Binding TitleImagePath}" WidthRequest="120"/>
+                                            <Label Text="{Binding Title}" FontAttributes="Bold" VerticalOptions="Center" FontSize="25"/>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.AttractionItemTappedCommand, Source={x:Reference AttractionPinsList}}" CommandParameter="{Binding .}" />
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+                </RefreshView>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
