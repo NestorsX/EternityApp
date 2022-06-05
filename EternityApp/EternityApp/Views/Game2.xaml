@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:EternityApp.Controls;assembly=EternityApp"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="EternityApp.Views.Game2"
+             Title="Мини-тест">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout x:Name="BusyLayout" IsVisible="false" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ActivityIndicator x:Name="LoadingWheel" IsRunning="False" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            <StackLayout x:Name="MainLayout" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ScrollView>
+                    <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Label x:Name="QuestionNumber" HorizontalOptions="Center" FontSize="Medium" TextColor="{StaticResource Primary}" />
+                        <controls:JustifiedLabel x:Name="QuestionLabel" JustifyText="True" TextColor="{StaticResource TextColor}" FontSize="Medium" FontAttributes="Bold" />
+                        <StackLayout Padding="0" BackgroundColor="Transparent" Margin="10">
+                            <ffimageloading:CachedImage x:Name="ImageBox" DownsampleToViewSize="True" HeightRequest="300" Aspect="AspectFit"/>
+                            <ActivityIndicator BindingContext="{x:Reference ImageBox}" IsRunning="{Binding IsLoading}"  IsVisible="{Binding IsLoading}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                        </StackLayout>
+                        <Label Text="Варианты ответов:" HorizontalOptions="CenterAndExpand" FontSize="Medium" FontAttributes="Bold"  />
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Button x:Name="AnswerButton1" Grid.Row="0" Clicked="AnswerButton_Clicked" />
+                            <Button x:Name="AnswerButton2" Grid.Row="1" Clicked="AnswerButton_Clicked" />
+                            <Button x:Name="AnswerButton3" Grid.Row="2" Clicked="AnswerButton_Clicked" />
+                            <Button x:Name="AnswerButton4" Grid.Row="3" Clicked="AnswerButton_Clicked" />
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+            <StackLayout x:Name="GoBackLayout" IsVisible="false" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout VerticalOptions="CenterAndExpand" Padding="20">
+                    <Label FontSize="Large" HorizontalTextAlignment="Center" Text="Вы ответили на все вопросы теста!" />
+                    <Label x:Name="RightAnswerResult" FontSize="Large" HorizontalTextAlignment="Center" />
+                    <Label x:Name="BestScore" FontSize="Large" HorizontalTextAlignment="Center" VerticalOptions="Center" />
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
