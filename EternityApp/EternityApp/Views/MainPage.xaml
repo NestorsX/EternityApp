@@ -14,12 +14,12 @@
                 <RefreshView x:Name="RefreshView" Refreshing="RefreshView_Refreshing">
                     <ScrollView>
                         <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <controls:JustifiedLabel Text="Тут текст какой-то" JustifyText="True" TextColor="{StaticResource TextColor}" FontSize="Medium" FontAttributes="Bold" />
+                            <controls:JustifiedLabel Text="Добро пожаловать! Приложение «Прикасаясь к вечности» позволит вам сэкономить время на поиск информации о древних городах Беларуси и достопримечательностях нашей страны. Узнайте больше в разделе «О приложении»." JustifyText="True" TextColor="{StaticResource TextColor}" FontSize="Medium" FontAttributes="Bold" />
                             <Label Text="Лучшие результаты игр:" FontSize="Medium" FontAttributes="Bold" Margin="0,20,0,0" />
                             <StackLayout x:Name="Game1BestScore" Margin="0,5,0,5">
                                 <Frame CornerRadius="25" Padding="0" BackgroundColor="{StaticResource Primary}">
                                     <StackLayout Padding="0">
-                                        <Label Text='Игра "Найди пару"' TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
+                                        <Label Text='Игра «Найди пару»' TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
                                         <Frame CornerRadius="25" Padding="0">
                                             <StackLayout Padding="10" Orientation="Horizontal" BackgroundColor="Transparent">
                                                 <StackLayout x:Name="Game1Result" IsVisible="true" Padding="0" Orientation="Horizontal" BackgroundColor="Transparent">
@@ -40,7 +40,7 @@
                             <StackLayout x:Name="Game2BestScore" Margin="0,5,0,5">
                                 <Frame CornerRadius="25" Padding="0" BackgroundColor="{StaticResource Primary}">
                                     <StackLayout Padding="0">
-                                        <Label Text='Игра "Мини-тест"' TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
+                                        <Label Text='Игра «Мини-тест»' TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
                                         <Frame CornerRadius="25" Padding="0">
                                             <StackLayout Padding="10" Orientation="Horizontal" BackgroundColor="Transparent">
                                                 <StackLayout x:Name="Game2Result" IsVisible="true" Padding="0" Orientation="Horizontal" BackgroundColor="Transparent">

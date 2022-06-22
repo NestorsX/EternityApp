@@ -2,12 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EternityApp.Views.AboutPage"
-             Title="О приложении">
+             Title="О приложении"
+             Padding="0">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <Image Source="icon_cities.png" WidthRequest="300" HorizontalOptions="CenterAndExpand" />
-            <Label Text="Прикасаясь к вечности" HorizontalOptions="CenterAndExpand" FontSize="Title" FontAttributes="Bold" />
-            <Label x:Name="InfoLabel" FontSize="Subtitle" HorizontalTextAlignment="Center"/>
-        </StackLayout>
+        <Grid Padding="0" BackgroundColor="#dfcbee">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Row="0" Grid.Column="0" Source="bg_about.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" />
+            <StackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="End" HorizontalOptions="Center">
+                <Image Source="icon_cities.png" WidthRequest="200" HorizontalOptions="CenterAndExpand" />
+                <Label Text="Прикасаясь к вечности" HorizontalTextAlignment="Center" FontSize="Title" FontAttributes="Bold" />
+                <Label x:Name="InfoLabel" FontSize="Subtitle" HorizontalTextAlignment="Center"/>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

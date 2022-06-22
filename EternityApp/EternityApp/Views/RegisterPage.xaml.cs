@@ -41,7 +41,9 @@ namespace EternityApp.Views
                     
                     await SecureStorage.SetAsync("ID", currentUser.UserId.ToString());
                     await SecureStorage.SetAsync("Username", currentUser.UserName);
-                    await SecureStorage.SetAsync("ImageUri", null);
+                    await SecureStorage.SetAsync("ImageUri", "");
+                    (Application.Current.MainPage as AppShell).ViewModel.Username = currentUser.UserName;
+                    (Application.Current.MainPage as AppShell).ViewModel.ImageSource = "icon_no_avatar.png";
                     await Shell.Current.GoToAsync("//MainPage");
                 }
                 catch

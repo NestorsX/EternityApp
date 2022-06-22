@@ -18,7 +18,7 @@ namespace EternityApp
             if (await SecureStorage.GetAsync("ID") != null)
             {
                 (Application.Current.MainPage as AppShell).ViewModel.Username = await SecureStorage.GetAsync("Username");
-                if (await SecureStorage.GetAsync("ImageUri") != null)
+                if (!string.IsNullOrWhiteSpace(await SecureStorage.GetAsync("ImageUri")))
                 {
                     (Application.Current.MainPage as AppShell).ViewModel.ImageSource = await SecureStorage.GetAsync("ImageUri");
                 }

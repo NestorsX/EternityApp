@@ -22,7 +22,7 @@
                                             <Label Text="{Binding Title}" TextColor="{StaticResource TitleColor}" HorizontalTextAlignment="Center" FontSize="25"/>
                                             <Frame CornerRadius="25" HeightRequest="190" Padding="0">
                                                 <StackLayout Padding="0" BackgroundColor="Transparent">
-                                                    <ffimageloading:CachedImage x:Name="Image" Source="{Binding TitleImagePath}" Aspect="AspectFill"/>
+                                                    <ffimageloading:CachedImage x:Name="Image" Source="{Binding TitleImagePath}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill"/>
                                                     <ActivityIndicator BindingContext="{x:Reference Image}" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
                                                 </StackLayout>
                                             </Frame>

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -57,7 +58,11 @@ namespace EternityApp.Services
         // Обновление пользователя
         public async Task Update(User user)
         {
-            await _client.PutAsync(_url, new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json"));
+            var response = await _client.PutAsync(_url, new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json"));
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new ArgumentException(JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync()));
+            }
         }
     }
 }

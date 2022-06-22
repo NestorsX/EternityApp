@@ -27,7 +27,7 @@
                             </Frame>
                         </StackLayout>
                         <StackLayout Padding="10" Margin="0,5,0,0">
-                            <Label x:Name="ErrorLabel" IsVisible="false" />
+                            <Label x:Name="ErrorLabel" IsVisible="false" Text="Проверьте введенные данные" />
                             <Frame>
                                 <StackLayout>
                                     <Label Text="Смена email" FontSize="Medium" FontAttributes="Bold" />

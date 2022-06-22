@@ -32,7 +32,7 @@ namespace EternityApp.Views
             _user = await _userService.Get(Convert.ToInt32(await SecureStorage.GetAsync("ID")));
             Email.Text = _user.Email;
             Username.Text = _user.UserName;
-            if (await SecureStorage.GetAsync("ImageUri") != null)
+            if (!string.IsNullOrWhiteSpace(await SecureStorage.GetAsync("ImageUri")))
             {
                 Image.Source = await SecureStorage.GetAsync("ImageUri");
             }
@@ -137,14 +137,16 @@ namespace EternityApp.Views
                     Password = newPassword ?? _user.Password,
                     RoleId = 0
                 });
+
+                await SecureStorage.SetAsync("Username", newUserName);
+                (Application.Current.MainPage as AppShell).ViewModel.Username = newUserName;
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
                 ErrorLabel.IsVisible = true;
                 ErrorLabel.Text = ex.Message;
             }
 
-            await SecureStorage.SetAsync("Username", newUserName);
             BusyLayout.IsVisible = false;
             LoadingWheel.IsRunning = false;
             MainLayout.IsVisible = true;

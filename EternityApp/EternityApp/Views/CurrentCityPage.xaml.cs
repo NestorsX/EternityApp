@@ -74,7 +74,7 @@ namespace EternityApp.Views
                     _attractions = _attractions.Append(attractionList.First(x => x.AttractionId == item));
                 }
 
-                BindableLayout.SetItemsSource(AttractionReferences, attractionList);
+                BindableLayout.SetItemsSource(AttractionReferences, _attractions);
             }
 
             BusyLayout.IsVisible = false;
