@@ -40,11 +40,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Row="0" Grid.Column="0" Source="bg_game2.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" />
-                    <StackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="Start" Padding="20" Margin="0,200,0,0">
+                    <Image Grid.Row="0" Source="bg_game2.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" />
+                    <StackLayout Grid.Row="0" VerticalOptions="Start" Padding="20" Margin="0,50,0,0">
                         <Label FontSize="Large" HorizontalTextAlignment="Center" Text="Вы ответили на все вопросы теста!" />
                         <Label x:Name="RightAnswerResult" FontSize="Large" HorizontalTextAlignment="Center" />
                         <Label x:Name="BestScore" FontSize="Large" HorizontalTextAlignment="Center" VerticalOptions="Center" />

@@ -31,11 +31,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Row="0" Grid.Column="0" Source="bg_game1.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" />
-                    <StackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="Start" Padding="20" Margin="0,200,0,0">
+                    <Image Grid.Row="0" Source="bg_game1.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" />
+                    <StackLayout Grid.Row="0" VerticalOptions="Start" Padding="20" Margin="0,50,0,0">
                         <Label FontSize="Large" HorizontalTextAlignment="Center" Text="Ура! Вы отгадали все карточки!" />
                         <Label x:Name="TimeResult" FontSize="Large" HorizontalTextAlignment="Center" Text="Затраченное время: " />
                         <Label x:Name="BestScore" FontSize="Large" Text="Лучший результат: " HorizontalTextAlignment="Center" VerticalOptions="Center" />

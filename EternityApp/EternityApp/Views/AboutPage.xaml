@@ -9,12 +9,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Image Grid.Row="0" Grid.Column="0" Source="bg_about.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" />
-            <StackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="End" HorizontalOptions="Center">
-                <Image Source="icon_cities.png" WidthRequest="200" HorizontalOptions="CenterAndExpand" />
+            <Image Grid.Row="0" Source="bg_about.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" />
+            <StackLayout Grid.Row="0" VerticalOptions="EndAndExpand" HorizontalOptions="Center">
                 <Label Text="Прикасаясь к вечности" HorizontalTextAlignment="Center" FontSize="Title" FontAttributes="Bold" />
                 <Label x:Name="InfoLabel" FontSize="Subtitle" HorizontalTextAlignment="Center"/>
             </StackLayout>
