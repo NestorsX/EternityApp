@@ -72,7 +72,8 @@ namespace EternityApp.Views
             await Shell.Current.GoToAsync($"/CurrentCityPage?id={(int)(e.Item as City).CityId}");
         }
 
-        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        // поиск
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e) 
         {
             _isSearching = !string.IsNullOrWhiteSpace(e.NewTextValue);
             citiesList.ItemsSource = _citiesList.Where(x => x.Title.ToLower().Contains(e.NewTextValue.ToLower())).ToList();

@@ -73,6 +73,7 @@ namespace EternityApp.Views
             await Shell.Current.GoToAsync($"/CurrentAttractionPage?id={(int)(e.Item as Attraction).AttractionId}");
         }
 
+        //поиск
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             _isSearching = !string.IsNullOrWhiteSpace(e.NewTextValue);
